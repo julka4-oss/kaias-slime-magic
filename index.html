@@ -133,6 +133,36 @@ details .prose{margin-top:10px}
 .contact-box{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
 .contact-box code{font:700 1rem ui-monospace,Menlo,monospace;background:var(--surface);border:1px solid var(--line);padding:8px 12px;border-radius:10px;user-select:all}
 
+/* slime jar cart */
+.jar-btn{position:relative;display:inline-grid;place-items:center;width:44px;height:40px;margin-left:4px;border:0;border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+.jar-btn:hover{background:var(--line)}
+.jar-icon{width:26px;height:30px}
+.jar-fill{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(.15);transition:transform .35s}
+.jar-btn.has-items .jar-fill{transform:scaleY(1)}
+.jar-btn.bump{animation:bump .4s}
+@keyframes bump{40%{transform:scale(1.2) rotate(-6deg)}}
+.jar-count{position:absolute;top:-2px;right:-2px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--pink);color:var(--pink-ink);font:800 .72rem/20px Nunito,system-ui,sans-serif;text-align:center;font-variant-numeric:tabular-nums}
+.jar-scrim{position:fixed;inset:0;background:rgba(20,8,32,.45);z-index:40}
+.jar-panel{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);z-index:50;background:var(--surface);color:var(--ink);box-shadow:-20px 0 40px -20px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:14px;padding:calc(18px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+.jar-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.jar-head h2{font-size:1.6rem}
+.jar-close{border:0;background:var(--line);color:var(--ink);width:38px;height:38px;border-radius:50%;font-size:1.5rem;line-height:1;cursor:pointer}
+.jar-empty{color:var(--muted);margin:0}
+.jar-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.jar-items li{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.jar-dot{width:44px;height:44px;border-radius:58% 42% 55% 45%/55% 50% 50% 45%;background:radial-gradient(circle at 40% 35%,var(--c1),var(--c2))}
+.jar-items strong{display:block;font-size:.98rem}
+.jar-items small{color:var(--muted);font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--ground);color:var(--ink);font-weight:800;cursor:pointer}
+.qty span{min-width:18px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+.jar-totals{margin-top:auto;display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums}
+.jar-totals div{display:flex;justify-content:space-between}
+.jar-total{font:700 1.25rem Fredoka,system-ui,sans-serif;padding-top:6px;border-top:1px solid var(--line)}
+.jar-totals .btn{margin-top:10px;width:100%}
+.jar-note{margin:4px 0 0;color:var(--muted);font-size:.9rem;text-align:center}
+body.jar-open{overflow:hidden}
+
 footer{background:var(--plum);color:#CDB9E3;padding-block:36px;font-size:.9rem}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 footer strong{color:#FFFFFF}
@@ -165,6 +195,7 @@ footer a{color:#F4ECFB}
       <a href="#shipping">Shipping</a>
       <a href="#faq">FAQ</a>
       <a class="cta" href="#shop">Shop</a>
+      <button class="jar-btn" id="jar-btn" type="button" aria-haspopup="dialog" aria-controls="jar-panel" aria-label="Open your slime jar, 0 slimes"><svg class="jar-icon" viewBox="0 0 32 36" aria-hidden="true"><rect x="7" y="2" width="18" height="6" rx="2.5" style="fill:var(--pink)"/><path d="M6 10h20a2 2 0 0 1 2 2v17a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V12a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2.4"/><path class="jar-fill" d="M6.5 22c3-2.5 6-2.5 9.5 0s6.5 2.5 9.5 0V29a3.5 3.5 0 0 1-3.5 3.5H10A3.5 3.5 0 0 1 6.5 29z" style="fill:var(--teal)"/><circle cx="11" cy="16" r="1.6" fill="currentColor" opacity=".35"/></svg><span class="jar-count" id="jar-count" hidden>0</span></button>
     </nav>
   </div>
 </header>
@@ -324,9 +355,26 @@ footer a{color:#F4ECFB}
   </div>
 </footer>
 
+<div class="jar-scrim" id="jar-scrim" hidden></div>
+<aside class="jar-panel" id="jar-panel" role="dialog" aria-modal="true" aria-labelledby="jar-title" hidden>
+  <div class="jar-head">
+    <h2 id="jar-title">Your slime jar</h2>
+    <button class="jar-close" id="jar-close" type="button" aria-label="Close your slime jar">×</button>
+  </div>
+  <p class="jar-empty" id="jar-empty">Your jar is empty. Scoop in some slime from the shop!</p>
+  <ul class="jar-items" id="jar-items"></ul>
+  <div class="jar-totals" id="jar-totals" hidden>
+    <div><span>Slimes</span><span id="jar-subtotal">$0.00</span></div>
+    <div><span>Shipping (U.S.)</span><span id="jar-shipping">$0.00</span></div>
+    <div class="jar-total"><span>Total</span><span id="jar-total">$0.00</span></div>
+    <button class="btn" id="jar-checkout" type="button">Check out</button>
+    <p class="jar-note" id="jar-note">Checkout opens soon. Kaia is getting the shop ready!</p>
+  </div>
+</aside>
+
 <script>
-// Edit this list to change the shop. Paste each Stripe Payment Link into "link".
-// Leave "link" empty to show "Coming soon". Set "soldOut: true" to show "Sold out".
+// Edit this list to change the shop.
+// Set "soldOut: true" to show "Sold out".
 const SLIMES = [
   { name: "Blue Raspberry Ice", texture: "Clear", scent: "Blue raspberry", price: 8, size: "6 oz",
     about: "Crystal clear and glassy, with loud little bubbles when you poke it.",
@@ -342,17 +390,23 @@ const SLIMES = [
     colors: ["#5FF0D2", "#7B3FE0"], photo: "", link: "", soldOut: true },
 ];
 
+// Stripe checkout for the whole jar goes here once payments are set up.
+const SHIPPING = 5.50;
+const CHECKOUT_URL = "";
+
 const grid = document.getElementById("slime-grid");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const idOf = s => s.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const money = n => "$" + n.toFixed(2);
+const byId = Object.fromEntries(SLIMES.map(s => [idOf(s), s]));
+
 grid.innerHTML = SLIMES.map(s => {
   const pic = s.photo
     ? `<img src="${esc(s.photo)}" alt="${esc(s.name)} slime">`
     : `<div class="blob" role="img" aria-label="${esc(s.name)} slime"></div>`;
   const button = s.soldOut
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
-    : s.link
-      ? `<a class="btn" href="${esc(s.link)}">Buy</a>`
-      : `<span class="btn" aria-disabled="true">Coming soon</span>`;
+    : `<button class="btn" type="button" data-add="${idOf(s)}">Add to jar</button>`;
   return `<article class="slime" style="--c1:${s.colors[0]};--c2:${s.colors[1]}">
     <div class="pic">${pic}</div>
     <div class="body">
@@ -365,6 +419,67 @@ grid.innerHTML = SLIMES.map(s => {
   </article>`;
 }).join("");
 if (SLIMES.some(s => s.link)) document.getElementById("sample-note").hidden = true;
+
+// The slime jar (cart). Saved in this browser so it survives a refresh.
+let jar = {};
+try { jar = JSON.parse(localStorage.getItem("slimeJar") || "{}") || {}; } catch (e) { jar = {}; }
+for (const id in jar) if (!byId[id] || byId[id].soldOut) delete jar[id];
+const save = () => { try { localStorage.setItem("slimeJar", JSON.stringify(jar)); } catch (e) {} };
+
+const $ = id => document.getElementById(id);
+const jarBtn = $("jar-btn"), panel = $("jar-panel"), scrim = $("jar-scrim");
+
+function render() {
+  const ids = Object.keys(jar);
+  const count = ids.reduce((n, id) => n + jar[id], 0);
+  const subtotal = ids.reduce((n, id) => n + jar[id] * byId[id].price, 0);
+  $("jar-count").textContent = count;
+  $("jar-count").hidden = count === 0;
+  jarBtn.classList.toggle("has-items", count > 0);
+  jarBtn.setAttribute("aria-label", `Open your slime jar, ${count} slime${count === 1 ? "" : "s"}`);
+  $("jar-empty").hidden = count > 0;
+  $("jar-totals").hidden = count === 0;
+  $("jar-items").innerHTML = ids.map(id => {
+    const s = byId[id];
+    return `<li style="--c1:${s.colors[0]};--c2:${s.colors[1]}">
+      <span class="jar-dot" aria-hidden="true"></span>
+      <div><strong>${esc(s.name)}</strong><small>${money(s.price)} each</small></div>
+      <div class="qty">
+        <button type="button" data-less="${id}" aria-label="One less ${esc(s.name)}">−</button>
+        <span>${jar[id]}</span>
+        <button type="button" data-more="${id}" aria-label="One more ${esc(s.name)}">+</button>
+      </div>
+    </li>`;
+  }).join("");
+  $("jar-subtotal").textContent = money(subtotal);
+  $("jar-shipping").textContent = money(count ? SHIPPING : 0);
+  $("jar-total").textContent = money(subtotal + (count ? SHIPPING : 0));
+  $("jar-checkout").setAttribute("aria-disabled", CHECKOUT_URL ? "false" : "true");
+  $("jar-note").hidden = !!CHECKOUT_URL;
+}
+
+function openJar() { panel.hidden = scrim.hidden = false; document.body.classList.add("jar-open"); $("jar-close").focus(); }
+function closeJar() { panel.hidden = scrim.hidden = true; document.body.classList.remove("jar-open"); jarBtn.focus(); }
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-add],[data-more],[data-less]");
+  if (!t) return;
+  const id = t.dataset.add || t.dataset.more || t.dataset.less;
+  if (t.dataset.less) { jar[id] -= 1; if (jar[id] <= 0) delete jar[id]; }
+  else jar[id] = (jar[id] || 0) + 1;
+  if (t.dataset.add) {
+    t.textContent = "Added!";
+    setTimeout(() => { t.textContent = "Add to jar"; }, 1200);
+    jarBtn.classList.remove("bump"); void jarBtn.offsetWidth; jarBtn.classList.add("bump");
+  }
+  save(); render();
+});
+jarBtn.addEventListener("click", openJar);
+$("jar-close").addEventListener("click", closeJar);
+scrim.addEventListener("click", closeJar);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !panel.hidden) closeJar(); });
+$("jar-checkout").addEventListener("click", () => { if (CHECKOUT_URL) location.href = CHECKOUT_URL; });
+render();
 </script>
 </body>
 </html>
