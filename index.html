@@ -104,8 +104,13 @@ section{padding-block:64px}
 .about .card{background:var(--surface);border-radius:28px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--line)}
 .about blockquote{margin:0;font-family:Fredoka,system-ui,sans-serif;font-size:1.35rem;line-height:1.35}
 .about .sig{margin-top:14px;font-weight:800;color:var(--pink)}
-.about .began{margin-top:14px;color:var(--pink);scroll-margin-top:90px}
-.about .story{font-family:Fredoka,system-ui,sans-serif;font-size:1.35rem;line-height:1.4;margin:16px 0 14px}
+.began{padding-top:0}
+#began{scroll-margin-top:90px}
+.photos{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px}
+.photos figure{margin:0}
+.photos img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;box-shadow:var(--shadow)}
+.photos figcaption{font-size:.9rem;font-weight:600;color:var(--muted);margin-top:8px}
+.began .story{font-family:Fredoka,system-ui,sans-serif;font-size:1.35rem;line-height:1.4;margin:16px 0 14px}
 .prose{max-width:65ch}
 .prose p{margin:0 0 14px}
 
@@ -137,6 +142,8 @@ footer a{color:#F4ECFB}
   .hero .wrap,.about .wrap,.safety-grid,.policies{grid-template-columns:1fr}
   .hero-logo{order:-1;max-width:300px}
   .steps{grid-template-columns:1fr}
+  .photos{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:68%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .photos figure{scroll-snap-align:start}
   section{padding-block:48px}
   header.site .wrap{justify-content:center}
   nav.main a{padding:6px 9px;font-size:.9rem}
@@ -209,9 +216,26 @@ footer a{color:#F4ECFB}
       </div>
       <div class="prose">
         <h2>Meet Kaia</h2>
-        <h3 id="began" class="began">How it all began</h3>
-        <p class="story">Kaia had aplastic anemia and had nothing to do in the hospital, so she decided to make a slime business. She started by selling to her doctors, nurses, friends, and family.</p>
         <p>Slime Magic is Kaia's small business, run with help from her family. Every order is mixed, packed and labeled by hand.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="began" id="began">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How it all began</h2>
+      </div>
+      <div class="prose">
+        <p class="story">Kaia had aplastic anemia and had nothing to do in the hospital, so she decided to make a slime business. She started by selling to her doctors, nurses, friends, and family.</p>
+
+      </div>
+      <div class="photos">
+        <figure><img src="photos/first-slime.jpg" alt="One of Kaia's first big slimes" loading="lazy" width="900" height="1200"><figcaption>One of Kaia's first big slimes</figcaption></figure>
+        <figure><img src="photos/hospital-slime.jpg" alt="Mixing slime in her hospital room" loading="lazy" width="900" height="1200"><figcaption>Mixing slime in her hospital room</figcaption></figure>
+        <figure><img src="photos/stretch-test.jpg" alt="The stretch test" loading="lazy" width="900" height="1200"><figcaption>The stretch test</figcaption></figure>
+        <figure><img src="photos/green-slime.jpg" alt="A fresh batch of green slime" loading="lazy" width="900" height="1200"><figcaption>A fresh batch of green slime</figcaption></figure>
+        <figure><img src="photos/slime-tower.jpg" alt="A tower of Slime Magic tubs" loading="lazy" width="900" height="1200"><figcaption>A tower of Slime Magic tubs</figcaption></figure>
       </div>
     </div>
   </section>
