@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Handmade slime made and packed by Kaia. Clear, jelly and glossy slimes shipped anywhere in the U.S. Ages 13+.">
+<link rel="icon" type="image/png" href="logo.png">
+<!--PREVIEW-START-->
+<title>Kaia's Slime Magic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap">
+<style>
+:root{
+  --ground:#F8F3FC; --surface:#FFFFFF; --ink:#26143A; --muted:#6B5A7E; --line:#E6DAF1;
+  --pink:#D6309C; --pink-ink:#FFFFFF; --teal:#0E9FB0; --sun:#FFC933; --plum:#3A1D5C; --warn-bg:#FFF4D6; --warn-ink:#5A4300;
+  --shadow:0 10px 30px -14px rgba(58,29,92,.35);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#170C24; --surface:#241538; --ink:#F4ECFB; --muted:#BBA8CF; --line:#3A2754;
+    --pink:#F05BB8; --pink-ink:#1B0B24; --teal:#3FD3E2; --plum:#0F0719; --warn-bg:#3A2E0A; --warn-ink:#FFE08A;
+    --shadow:0 10px 30px -14px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#170C24; --surface:#241538; --ink:#F4ECFB; --muted:#BBA8CF; --line:#3A2754;
+  --pink:#F05BB8; --pink-ink:#1B0B24; --teal:#3FD3E2; --plum:#0F0719; --warn-bg:#3A2E0A; --warn-ink:#FFE08A;
+  --shadow:0 10px 30px -14px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 17px/1.6 Nunito,"Trebuchet MS",system-ui,sans-serif}
+img{max-width:100%;height:auto}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:Fredoka,"Arial Rounded MT Bold",system-ui,sans-serif;line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700}
+h3{font-size:1.3rem;font-weight:600}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+.age-bar{background:var(--plum);color:#F4ECFB;text-align:center;font-weight:800;font-size:.85rem;letter-spacing:.04em;padding:8px 16px}
+.age-bar span{color:var(--sun)}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:Fredoka,system-ui,sans-serif;font-weight:700;font-size:1.25rem}
+.brand img{width:48px;height:auto}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{color:var(--ink);text-decoration:none;font-weight:800;font-size:.95rem;padding:6px 12px;border-radius:999px}
+nav.main a:hover{background:var(--line)}
+nav.main a.cta{background:var(--pink);color:var(--pink-ink)}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;padding-block:48px 64px}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:700}
+.hero h1 em{font-style:normal;color:var(--pink)}
+.hero p.lede{font-size:1.2rem;color:var(--muted);max-width:32ch;margin:16px 0 24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:800 1rem/1 Nunito,system-ui,sans-serif;padding:14px 22px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;background:var(--pink);color:var(--pink-ink);box-shadow:var(--shadow);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:none;border:2px solid var(--line)}
+.btn[aria-disabled="true"]{background:var(--line);color:var(--muted);box-shadow:none;cursor:not-allowed;transform:none}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-logo{justify-self:center;max-width:440px;width:100%;animation:wobble 6s ease-in-out infinite}
+@keyframes wobble{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.03)}}
+.drip{display:block;width:100%;height:40px;color:var(--plum)}
+
+/* shop */
+section{padding-block:64px}
+.shop{background:var(--plum);color:#F4ECFB}
+.shop h2{color:#FFFFFF}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.section-head p{margin:0;color:var(--muted);max-width:52ch}
+.shop .section-head p{color:#CDB9E3}
+.sample-note{background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:10px 14px;font-weight:600;font-size:.95rem;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.slime{background:var(--surface);color:var(--ink);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.slime .pic{aspect-ratio:1/1;display:grid;place-items:center;background:radial-gradient(circle at 50% 60%,color-mix(in srgb,var(--c1) 22%,transparent),transparent 70%)}
+.slime .pic img{width:100%;height:100%;object-fit:cover}
+.blob{width:62%;aspect-ratio:1.15/1;border-radius:58% 42% 55% 45%/55% 50% 50% 45%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.85) 0 8%,transparent 9%),radial-gradient(circle at 40% 35%,var(--c1),var(--c2));box-shadow:inset -10px -14px 24px rgba(0,0,0,.18),0 14px 20px -12px var(--c2);animation:squish 4s ease-in-out infinite}
+.slime:nth-child(2n) .blob{animation-delay:-1.5s}
+@keyframes squish{0%,100%{border-radius:58% 42% 55% 45%/55% 50% 50% 45%}50%{border-radius:45% 55% 42% 58%/50% 58% 42% 50%}}
+.slime .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--line);color:var(--ink)}
+.chip.texture{background:color-mix(in srgb,var(--teal) 18%,var(--surface));color:var(--ink)}
+.slime p{margin:0;color:var(--muted);font-size:.95rem}
+.slime .meta{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.slime .buy{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:8px}
+.price{font-family:Fredoka,system-ui,sans-serif;font-weight:700;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.slime .btn{padding:11px 16px;font-size:.95rem}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--teal);color:var(--surface);font:700 1.1rem Fredoka,system-ui,sans-serif;margin-bottom:10px}
+.steps p{margin:6px 0 0;color:var(--muted)}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center}
+.about .card{background:var(--surface);border-radius:28px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.about blockquote{margin:0;font-family:Fredoka,system-ui,sans-serif;font-size:1.35rem;line-height:1.35}
+.about .sig{margin-top:14px;font-weight:800;color:var(--pink)}
+.prose{max-width:65ch}
+.prose p{margin:0 0 14px}
+
+/* safety */
+.safety{background:var(--surface);border-block:1px solid var(--line)}
+.warn-label{border:3px solid var(--ink);border-radius:14px;padding:18px 20px;max-width:560px;background:var(--ground)}
+.warn-label h3{font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.warn-label ul{margin:0;padding-left:20px}
+.warn-label li{margin:4px 0}
+.safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin-top:8px}
+.ingredients{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:10px 0 0}
+.ingredients li{padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:.95rem}
+
+/* faq & policies */
+details{border-bottom:1px solid var(--line);padding-block:14px}
+details summary{cursor:pointer;font-weight:800;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details summary::after{content:"+";font-family:Fredoka,system-ui,sans-serif;font-size:1.4rem;line-height:1;color:var(--pink)}
+details[open] summary::after{content:"–"}
+details p,details li{color:var(--muted)}
+details .prose{margin-top:10px}
+.policies{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact-box{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.contact-box code{font:700 1rem ui-monospace,Menlo,monospace;background:var(--surface);border:1px solid var(--line);padding:8px 12px;border-radius:10px;user-select:all}
+
+footer{background:var(--plum);color:#CDB9E3;padding-block:36px;font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer strong{color:#FFFFFF}
+footer a{color:#F4ECFB}
+
+@media (max-width:760px){
+  .hero .wrap,.about .wrap,.safety-grid,.policies{grid-template-columns:1fr}
+  .hero-logo{order:-1;max-width:300px}
+  .steps{grid-template-columns:1fr}
+  section{padding-block:48px}
+  header.site .wrap{justify-content:center}
+  nav.main a{padding:6px 9px;font-size:.9rem}
+}
+@media (max-width:480px){.brand span{display:none}.brand img{width:40px}header.site .wrap{justify-content:space-between;flex-wrap:nowrap}nav.main{gap:0}nav.main a{padding:6px 7px;font-size:.85rem}}
+</style>
+<!--PREVIEW-HEAD-END-->
+</head>
+<body>
+<div class="age-bar">Handmade slime for ages <span>13+</span>. Not a toy for young children.</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="logo.png" alt="Kaia's Slime Magic home"><span>Kaia's Slime Magic</span></a>
+    <nav class="main" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#safety">Safety</a>
+      <a href="#shipping">Shipping</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#shop">Shop</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Stretchy, glossy, <em>squishy</em> slime, handmade by Kaia.</h1>
+        <p class="lede">Small batches mixed, stretched and packed by hand, then mailed to your door anywhere in the U.S.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#shop">Shop slimes</a>
+          <a class="btn ghost" href="#about">Meet Kaia</a>
+        </div>
+      </div>
+      <img class="hero-logo" src="logo.png" alt="Slime Magic logo: bubbly pink and teal letters on a purple splat with a rainbow and stars" width="690" height="580">
+    </div>
+  </div>
+
+  <svg class="drip" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 40V22c60 0 70 14 110 14s40-20 90-20 60 22 110 22 50-26 100-26 70 18 120 18 40-12 90-12 60 20 110 20 50-24 100-24 70 16 120 16 60-10 100-10 70 16 110 16 30-10 40-10V40z"/></svg>
+
+  <section class="shop" id="shop">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The Slime Shelf</h2>
+        <p>Each slime comes in a sealed 6 oz tub with a batch code on the label.</p>
+      </div>
+      <div class="sample-note" id="sample-note">Sample slimes shown. Kaia's real slimes, photos and prices are coming soon.</div>
+      <div class="grid" id="slime-grid"></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head"><h2>From Kaia's table to your mailbox</h2></div>
+      <ol class="steps">
+        <li><h3>You order</h3><p>Pick your slimes and pay securely through Stripe. You get an email receipt right away.</p></li>
+        <li><h3>Kaia packs it</h3><p>Your slime is sealed in a leak-proof tub, bagged and boxed within 3 business days.</p></li>
+        <li><h3>It ships</h3><p>USPS Ground Advantage, usually 2 to 5 days, with tracking sent by email.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="card">
+        <blockquote>"I love making slime that feels amazing to stretch. Every tub is one I would want to play with myself."</blockquote>
+        <div class="sig">Kaia, slime maker</div>
+      </div>
+      <div class="prose">
+        <h2>Meet Kaia</h2>
+        <p>Kaia started making slime at the kitchen table and never stopped. She tests every recipe until the stretch, the shine and the sound are just right, then names each one herself.</p>
+        <p>Slime Magic is her small business, run with help from her family. Every order is mixed, packed and labeled by hand.</p>
+        <p><em>Kaia will write this part in her own words before launch.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="safety" id="safety">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Safety &amp; ingredients</h2>
+        <p>Please read this before you play. The same warnings are printed on every tub.</p>
+      </div>
+      <div class="safety-grid">
+        <div class="warn-label" role="note" aria-label="Warning label">
+          <h3>Warning</h3>
+          <ul>
+            <li><strong>For ages 13 and up.</strong> Not a toy for young children. Adult supervision for anyone younger.</li>
+            <li><strong>Do not eat.</strong> Slime is not food, even when it smells sweet.</li>
+            <li>Wash hands before and after play.</li>
+            <li>Keep away from hair, carpet, fabric and pets.</li>
+            <li>Stop playing if skin gets red or itchy.</li>
+            <li>Some slimes contain small add-ins. Choking hazard for small children.</li>
+          </ul>
+        </div>
+        <div class="prose">
+          <h3>What's inside</h3>
+          <p>Kaia uses ingredients bought from U.S. stores:</p>
+          <ul class="ingredients">
+            <li>Clear PVA glue</li><li>Water</li><li>Borate activator</li><li>Lotion</li><li>Soap</li><li>Glycerin</li><li>Colorant</li>
+          </ul>
+          <p style="margin-top:14px">Each product lists its exact add-ins and any scent. If you are sensitive to borates, fragrance, glue or lotion, please choose another slime.</p>
+          <p>Every tub carries a batch code (for example <strong>2610-03</strong> means October 2026, batch 3) so we can trace any question back to the batch it came from.</p>
+          <p><strong>Best within 4 weeks.</strong> Store with the lid closed, and throw it away if it smells off or shows spots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shipping">
+    <div class="wrap policies">
+      <div class="prose">
+        <h2>Shipping</h2>
+        <p>We ship to U.S. addresses only. Shipping is a flat <strong>$5.50</strong> per order.</p>
+        <p>Orders are packed within 3 business days and sent by USPS Ground Advantage with tracking.</p>
+        <p>Very hot or cold weather can change a slime's texture on the way. Most slime bounces back after a day at room temperature.</p>
+      </div>
+      <div class="prose">
+        <h2>Returns</h2>
+        <p>Because slime is played with by hand, we can't accept returns.</p>
+        <p>If your slime arrives leaked, damaged or wrong, email a photo within 7 days of delivery and we'll send a replacement or a refund.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions</h2></div>
+      <div class="prose" style="max-width:760px">
+        <details><summary>My slime got sticky. What do I do?</summary><p>Knead it for a minute with clean hands. If it's still sticky, add one or two drops of slime activator and knead again. Go slowly, because too much makes it stiff.</p></details>
+        <details><summary>My slime got hard. Can I fix it?</summary><p>Knead in a small squirt of lotion or a few drops of glycerin. Warm hands help too.</p></details>
+        <details><summary>How do I get slime out of clothes?</summary><p>Soak the spot with white vinegar, work it with your fingers, then wash as normal.</p></details>
+        <details><summary>Is this slime for little kids?</summary><p>No. Kaia's slime is made for ages 13 and up. Younger kids should only play with it with an adult watching.</p></details>
+        <details id="terms"><summary>Terms of sale</summary>
+          <div class="prose">
+            <p>By placing an order you agree that:</p>
+            <ul>
+              <li>Slime Magic products are for ages 13 and up, or for use with adult supervision.</li>
+              <li>Slime is not edible and must be kept away from mouths, eyes, young children and pets.</li>
+              <li>You have read the warnings and ingredient list above.</li>
+              <li>Our total responsibility for any order is limited to the amount you paid for it.</li>
+              <li>Orders are handled by a parent on Kaia's behalf. Payments are processed by Stripe.</li>
+            </ul>
+          </div>
+        </details>
+        <details id="privacy"><summary>Privacy</summary>
+          <div class="prose">
+            <p>We only use your name, email and shipping address to fill your order. Payments are handled by Stripe, and we never see or store your card number. We don't sell or share your information, and this site doesn't use tracking cookies.</p>
+          </div>
+        </details>
+      </div>
+      <div class="contact-box" id="contact">
+        <strong>Questions or order problems?</strong> Email <code>hello@example.com</code>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Kaia's Slime Magic</strong><br>Handmade in the U.S.A. for ages 13+.</div>
+    <div><a href="#terms">Terms of sale</a> · <a href="#privacy">Privacy</a> · <a href="#shipping">Shipping &amp; returns</a></div>
+  </div>
+</footer>
+
+<script>
+// Edit this list to change the shop. Paste each Stripe Payment Link into "link".
+// Leave "link" empty to show "Coming soon". Set "soldOut: true" to show "Sold out".
+const SLIMES = [
+  { name: "Blue Raspberry Ice", texture: "Clear", scent: "Blue raspberry", price: 8, size: "6 oz",
+    about: "Crystal clear and glassy, with loud little bubbles when you poke it.",
+    colors: ["#7FE3F2", "#1597C9"], photo: "", link: "" },
+  { name: "Grape Soda Jelly", texture: "Jelly", scent: "Grape soda", price: 9, size: "6 oz",
+    about: "Thick, wobbly and jiggly. It holds a shape for a second, then melts.",
+    colors: ["#C58BFF", "#6A2BC2"], photo: "", link: "" },
+  { name: "Cotton Candy Gloss", texture: "Glossy", scent: "Cotton candy", price: 9, size: "6 oz",
+    about: "Super shiny and extra stretchy, with a soft pink swirl.",
+    colors: ["#FFB3DE", "#E0409E"], photo: "", link: "" },
+  { name: "Mermaid Lagoon", texture: "Clear", scent: "Unscented", price: 10, size: "6 oz",
+    about: "Teal and violet swirled together. Unscented for sensitive noses.",
+    colors: ["#5FF0D2", "#7B3FE0"], photo: "", link: "", soldOut: true },
+];
+
+const grid = document.getElementById("slime-grid");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+grid.innerHTML = SLIMES.map(s => {
+  const pic = s.photo
+    ? `<img src="${esc(s.photo)}" alt="${esc(s.name)} slime">`
+    : `<div class="blob" role="img" aria-label="${esc(s.name)} slime"></div>`;
+  const button = s.soldOut
+    ? `<span class="btn" aria-disabled="true">Sold out</span>`
+    : s.link
+      ? `<a class="btn" href="${esc(s.link)}">Buy</a>`
+      : `<span class="btn" aria-disabled="true">Coming soon</span>`;
+  return `<article class="slime" style="--c1:${s.colors[0]};--c2:${s.colors[1]}">
+    <div class="pic">${pic}</div>
+    <div class="body">
+      <div class="chips"><span class="chip texture">${esc(s.texture)}</span><span class="chip">13+</span></div>
+      <h3>${esc(s.name)}</h3>
+      <p>${esc(s.about)}</p>
+      <div class="meta">${esc(s.size)} · ${esc(s.scent)}</div>
+      <div class="buy"><span class="price">$${s.price}</span>${button}</div>
+    </div>
+  </article>`;
+}).join("");
+if (SLIMES.some(s => s.link)) document.getElementById("sample-note").hidden = true;
+</script>
+</body>
+</html>
