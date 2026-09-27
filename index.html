@@ -100,6 +100,10 @@ section{padding-block:64px}
 .steps p{margin:6px 0 0;color:var(--muted)}
 
 /* about */
+.about .wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center}
+.about .card{background:var(--surface);border-radius:28px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.about blockquote{margin:0;font-family:Fredoka,system-ui,sans-serif;font-size:1.35rem;line-height:1.35}
+.about .sig{margin-top:14px;font-weight:800;color:var(--pink)}
 .about .story{font-family:Fredoka,system-ui,sans-serif;font-size:1.35rem;line-height:1.4;margin:16px 0 14px}
 .prose{max-width:65ch}
 .prose p{margin:0 0 14px}
@@ -129,7 +133,7 @@ footer strong{color:#FFFFFF}
 footer a{color:#F4ECFB}
 
 @media (max-width:760px){
-  .hero .wrap,.safety-grid,.policies{grid-template-columns:1fr}
+  .hero .wrap,.about .wrap,.safety-grid,.policies{grid-template-columns:1fr}
   .hero-logo{order:-1;max-width:300px}
   .steps{grid-template-columns:1fr}
   section{padding-block:48px}
@@ -197,6 +201,10 @@ footer a{color:#F4ECFB}
 
   <section class="about" id="about">
     <div class="wrap">
+      <div class="card">
+        <blockquote>"I love making slime that feels amazing to stretch. Every tub is one I would want to play with myself."</blockquote>
+        <div class="sig">Kaia, slime maker</div>
+      </div>
       <div class="prose">
         <h2>Meet Kaia</h2>
         <p class="story">Kaia had aplastic anemia and had nothing to do in the hospital, so she decided to make a slime business. She started by selling to her doctors, friends and family.</p>
