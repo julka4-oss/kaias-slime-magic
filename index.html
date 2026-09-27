@@ -406,7 +406,7 @@ grid.innerHTML = SLIMES.map(s => {
     : `<div class="blob" role="img" aria-label="${esc(s.name)} slime"></div>`;
   const button = s.soldOut
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
-    : `<button class="btn" type="button" data-add="${idOf(s)}">Add to jar</button>`;
+    : `<button class="btn" type="button" data-add="${idOf(s)}">Add to cart</button>`;
   return `<article class="slime" style="--c1:${s.colors[0]};--c2:${s.colors[1]}">
     <div class="pic">${pic}</div>
     <div class="body">
@@ -469,7 +469,7 @@ document.addEventListener("click", e => {
   else jar[id] = (jar[id] || 0) + 1;
   if (t.dataset.add) {
     t.textContent = "Added!";
-    setTimeout(() => { t.textContent = "Add to jar"; }, 1200);
+    setTimeout(() => { t.textContent = "Add to cart"; }, 1200);
     jarBtn.classList.remove("bump"); void jarBtn.offsetWidth; jarBtn.classList.add("bump");
   }
   save(); render();
