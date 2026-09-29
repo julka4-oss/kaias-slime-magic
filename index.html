@@ -79,7 +79,10 @@ section{padding-block:64px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
 .slime{background:var(--surface);color:var(--ink);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
 .slime .pic{aspect-ratio:1/1;display:grid;place-items:center;background:radial-gradient(circle at 50% 60%,color-mix(in srgb,var(--c1) 22%,transparent),transparent 70%)}
-.slime .pic img{width:100%;height:100%;object-fit:cover}
+.slime .pic{position:relative}
+.slime .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.slime .pic img.alt{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.slime:hover .pic img.alt,.slime .pic:active img.alt{opacity:1}
 .blob{width:62%;aspect-ratio:1.15/1;border-radius:58% 42% 55% 45%/55% 50% 50% 45%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.85) 0 8%,transparent 9%),radial-gradient(circle at 40% 35%,var(--c1),var(--c2));box-shadow:inset -10px -14px 24px rgba(0,0,0,.18),0 14px 20px -12px var(--c2);animation:squish 4s ease-in-out infinite}
 .slime:nth-child(2n) .blob{animation-delay:-1.5s}
 @keyframes squish{0%,100%{border-radius:58% 42% 55% 45%/55% 50% 50% 45%}50%{border-radius:45% 55% 42% 58%/50% 58% 42% 50%}}
@@ -223,7 +226,7 @@ footer a{color:#F4ECFB}
         <h2>The Slime Shelf</h2>
         <p>Each slime comes in a sealed 6 oz tub with the logo on top.</p>
       </div>
-      <div class="sample-note" id="sample-note">Sample slimes shown. Kaia's real slimes, photos and prices are coming soon.</div>
+      <div class="sample-note" id="sample-note">Mermaid Lagoon is Kaia's first real slime! The others are samples for now.</div>
       <div class="grid" id="slime-grid"></div>
     </div>
   </section>
@@ -376,6 +379,9 @@ footer a{color:#F4ECFB}
 // Edit this list to change the shop.
 // Set "soldOut: true" to show "Sold out".
 const SLIMES = [
+  { name: "Mermaid Lagoon", texture: "Clear", scent: "Unscented", price: 10, size: "6 oz",
+    about: "Teal and violet swirled together like the ocean, with little whale charms on top.",
+    colors: ["#5FF0D2", "#7B3FE0"], photo: "photos/mermaid-lagoon-1.jpg", photo2: "photos/mermaid-lagoon-2.jpg" },
   { name: "Blue Raspberry Ice", texture: "Clear", scent: "Blue raspberry", price: 8, size: "6 oz",
     about: "Crystal clear and glassy, with loud little bubbles when you poke it.",
     colors: ["#7FE3F2", "#1597C9"], photo: "", link: "" },
@@ -385,9 +391,6 @@ const SLIMES = [
   { name: "Cotton Candy Gloss", texture: "Glossy", scent: "Cotton candy", price: 9, size: "6 oz",
     about: "Super shiny and extra stretchy, with a blue and pink swirl.",
     colors: ["#8FD3FF", "#E0409E"], photo: "", link: "" },
-  { name: "Mermaid Lagoon", texture: "Clear", scent: "Unscented", price: 10, size: "6 oz",
-    about: "Teal and violet swirled together. Unscented for sensitive noses.",
-    colors: ["#5FF0D2", "#7B3FE0"], photo: "", link: "", soldOut: true },
 ];
 
 // Stripe checkout for the whole jar goes here once payments are set up.
@@ -402,7 +405,8 @@ const byId = Object.fromEntries(SLIMES.map(s => [idOf(s), s]));
 
 grid.innerHTML = SLIMES.map(s => {
   const pic = s.photo
-    ? `<img src="${esc(s.photo)}" alt="${esc(s.name)} slime">`
+    ? `<img src="${esc(s.photo)}" alt="${esc(s.name)} slime in a jar with the Slime Magic logo on the lid" loading="lazy">` +
+      (s.photo2 ? `<img class="alt" src="${esc(s.photo2)}" alt="Looking inside the ${esc(s.name)} jar" loading="lazy">` : "")
     : `<div class="blob" role="img" aria-label="${esc(s.name)} slime"></div>`;
   const button = s.soldOut
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
@@ -418,7 +422,6 @@ grid.innerHTML = SLIMES.map(s => {
     </div>
   </article>`;
 }).join("");
-if (SLIMES.some(s => s.link)) document.getElementById("sample-note").hidden = true;
 
 // The slime jar (cart). Saved in this browser so it survives a refresh.
 let jar = {};
