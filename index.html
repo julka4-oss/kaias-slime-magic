@@ -405,8 +405,8 @@ const byId = Object.fromEntries(SLIMES.map(s => [idOf(s), s]));
 
 grid.innerHTML = SLIMES.map(s => {
   const pic = s.photo
-    ? `<img src="${esc(s.photo)}" alt="${esc(s.name)} slime in a jar with the Slime Magic logo on the lid" loading="lazy">` +
-      (s.photo2 ? `<img class="alt" src="${esc(s.photo2)}" alt="Looking inside the ${esc(s.name)} jar" loading="lazy">` : "")
+    ? `<img src="${esc(s.photo)}" alt="${esc(s.name)} slime, one jar closed with the Slime Magic logo and one open" loading="lazy">` +
+      (s.photo2 ? `<img class="alt" src="${esc(s.photo2)}" alt="The open ${esc(s.name)} jar showing what is inside" loading="lazy">` : "")
     : `<div class="blob" role="img" aria-label="${esc(s.name)} slime"></div>`;
   const button = s.soldOut
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
