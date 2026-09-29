@@ -252,7 +252,7 @@ footer a{color:#F4ECFB}
         <h2>The Slime Shelf</h2>
         <p>Each slime comes in a sealed 6 oz tub with the logo on top.</p>
       </div>
-      <div class="sample-note" id="sample-note">Mermaid Lagoon and Cotton Candy Gloss are Kaia's real slimes! The others are samples for now.</div>
+      <div class="sample-note" id="sample-note">Mermaid Lagoon, Cotton Candy Gloss and Birthday Cake Batter are Kaia's real slimes! The others are samples for now.</div>
       <div class="grid" id="slime-grid"></div>
     </div>
   </section>
@@ -413,6 +413,10 @@ const SLIMES = [
   { name: "Cotton Candy Gloss", texture: "Glossy", scent: "Unscented", price: 10, size: "6 oz",
     about: "Super shiny and extra stretchy, with a blue and pink swirl.",
     colors: ["#8FD3FF", "#E0409E"], photo: "photos/cotton-candy-gloss-1.jpg", photo2: "photos/cotton-candy-gloss-2.jpg", photo3: "photos/cotton-candy-gloss-3.jpg" },
+  { name: "Birthday Cake Batter", texture: "Creamy", scent: "Unscented", price: 10, size: "6 oz",
+    about: "Creamy vanilla slime topped with a party of rainbow sprinkles.",
+    colors: ["#FFF1A8", "#FF7AC8"], photo: "photos/birthday-cake-batter-1.jpg", photo2: "photos/birthday-cake-batter-2.jpg",
+    photo3: "photos/birthday-cake-batter-3.jpg", alt3: "Looking down into the open Birthday Cake Batter jar at the rainbow sprinkles" },
   { name: "Blue Raspberry Ice", texture: "Clear", scent: "Unscented", price: 10, size: "6 oz",
     about: "Crystal clear and glassy, with loud little bubbles when you poke it.",
     colors: ["#7FE3F2", "#1597C9"], photo: "", link: "" },
@@ -498,7 +502,7 @@ const detail = $("detail");
 function openDetail(id) {
   const s = byId[id]; if (!s) return;
   const pics = [s.photo, s.photo2, s.photo3].filter(Boolean);
-  const alts = [`${s.name} slime, one jar closed with the Slime Magic logo and one open`, `The open ${s.name} jar showing what is inside`, `A closed ${s.name} jar with the Slime Magic logo`];
+  const alts = [`${s.name} slime, one jar closed with the Slime Magic logo and one open`, `The open ${s.name} jar showing what is inside`, s.alt3 || `A closed ${s.name} jar with the Slime Magic logo`];
   detail.style.setProperty("--c1", s.colors[0]); detail.style.setProperty("--c2", s.colors[1]);
   const button = s.soldOut
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
