@@ -86,6 +86,12 @@ section{padding-block:64px}
 .blob{width:62%;aspect-ratio:1.15/1;border-radius:58% 42% 55% 45%/55% 50% 50% 45%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.85) 0 8%,transparent 9%),radial-gradient(circle at 40% 35%,var(--c1),var(--c2));box-shadow:inset -10px -14px 24px rgba(0,0,0,.18),0 14px 20px -12px var(--c2);animation:squish 4s ease-in-out infinite}
 .slime:nth-child(2n) .blob{animation-delay:-1.5s}
 @keyframes squish{0%,100%{border-radius:58% 42% 55% 45%/55% 50% 50% 45%}50%{border-radius:45% 55% 42% 58%/50% 58% 42% 50%}}
+.slime .open{border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:inherit}
+.slime .pic.open{width:100%}
+.slime h3 .open{background:none}
+.slime .open:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:8px}
+.slime h3 .open:hover{text-decoration:underline}
+.slime .more{font-size:.85rem;font-weight:800;color:var(--ink);text-decoration:underline;cursor:pointer;background:none;border:0;padding:0;align-self:flex-start;font-family:inherit}
 .slime .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--line);color:var(--ink)}
@@ -165,6 +171,26 @@ details .prose{margin-top:10px}
 .jar-totals .btn{margin-top:10px;width:100%}
 .jar-note{margin:4px 0 0;color:var(--muted);font-size:.9rem;text-align:center}
 body.jar-open{overflow:hidden}
+.detail{border:0;padding:0;width:min(860px,calc(100% - 32px));max-height:calc(100dvh - 32px);border-radius:24px;background:var(--surface);color:var(--ink);box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.detail::backdrop{background:rgba(20,8,32,.55)}
+.detail-in{display:grid;grid-template-columns:1.1fr 1fr;gap:0}
+.detail-pics{padding:16px;display:flex;flex-direction:column;gap:10px;background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--c1) 22%,transparent),transparent 70%)}
+.detail-main{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;display:block}
+.detail-main.blob-wrap{display:grid;place-items:center}
+.detail-thumbs{display:flex;gap:8px}
+.detail-thumbs button{border:3px solid transparent;border-radius:12px;padding:0;background:none;cursor:pointer;width:72px;height:72px;overflow:hidden}
+.detail-thumbs button[aria-current="true"]{border-color:var(--pink)}
+.detail-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.detail-text{padding:24px 24px 24px 8px;display:flex;flex-direction:column;gap:12px;position:relative}
+.detail-text h2{font-size:2rem;margin:0;padding-right:44px}
+.detail-text p{margin:0;color:var(--muted)}
+.detail-facts{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.detail-facts li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.detail-facts span:first-child{color:var(--muted)}
+.detail-text .buy{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:8px}
+.detail-text .jar-close{position:absolute;top:16px;right:16px}
+.detail-safety{font-size:.9rem}
+@media (max-width:700px){.detail{width:100%;max-width:100%;max-height:100dvh;height:100dvh;border-radius:0;margin:0}.detail-in{grid-template-columns:1fr}.detail-text{padding:4px 16px 24px}.detail-pics{padding:16px 16px 8px}.detail-text .jar-close{position:fixed;top:24px;right:24px;z-index:2;background:var(--surface)}}
 
 footer{background:var(--plum);color:#CDB9E3;padding-block:36px;font-size:.9rem}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -358,6 +384,8 @@ footer a{color:#F4ECFB}
   </div>
 </footer>
 
+<dialog class="detail" id="detail" aria-labelledby="detail-title"></dialog>
+
 <div class="jar-scrim" id="jar-scrim" hidden></div>
 <aside class="jar-panel" id="jar-panel" role="dialog" aria-modal="true" aria-labelledby="jar-title" hidden>
   <div class="jar-head">
@@ -381,10 +409,10 @@ footer a{color:#F4ECFB}
 const SLIMES = [
   { name: "Mermaid Lagoon", texture: "Clear", scent: "Unscented", price: 10, size: "6 oz",
     about: "Teal and violet swirled together like the ocean, with little whale charms on top.",
-    colors: ["#5FF0D2", "#7B3FE0"], photo: "photos/mermaid-lagoon-1.jpg", photo2: "photos/mermaid-lagoon-2.jpg" },
+    colors: ["#5FF0D2", "#7B3FE0"], photo: "photos/mermaid-lagoon-1.jpg", photo2: "photos/mermaid-lagoon-2.jpg", photo3: "photos/mermaid-lagoon-3.jpg" },
   { name: "Cotton Candy Gloss", texture: "Glossy", scent: "Cotton candy", price: 10, size: "6 oz",
     about: "Super shiny and extra stretchy, with a blue and pink swirl.",
-    colors: ["#8FD3FF", "#E0409E"], photo: "photos/cotton-candy-gloss-1.jpg", photo2: "photos/cotton-candy-gloss-2.jpg" },
+    colors: ["#8FD3FF", "#E0409E"], photo: "photos/cotton-candy-gloss-1.jpg", photo2: "photos/cotton-candy-gloss-2.jpg", photo3: "photos/cotton-candy-gloss-3.jpg" },
   { name: "Blue Raspberry Ice", texture: "Clear", scent: "Blue raspberry", price: 10, size: "6 oz",
     about: "Crystal clear and glassy, with loud little bubbles when you poke it.",
     colors: ["#7FE3F2", "#1597C9"], photo: "", link: "" },
@@ -412,11 +440,12 @@ grid.innerHTML = SLIMES.map(s => {
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
     : `<button class="btn" type="button" data-add="${idOf(s)}">Add to cart</button>`;
   return `<article class="slime" style="--c1:${s.colors[0]};--c2:${s.colors[1]}">
-    <div class="pic">${pic}</div>
+    <button class="open pic" type="button" data-open="${idOf(s)}" aria-label="See ${esc(s.name)} up close">${pic}</button>
     <div class="body">
       <div class="chips"><span class="chip texture">${esc(s.texture)}</span><span class="chip">13+</span></div>
-      <h3>${esc(s.name)}</h3>
+      <h3><button class="open" type="button" data-open="${idOf(s)}">${esc(s.name)}</button></h3>
       <p>${esc(s.about)}</p>
+      <button class="more" type="button" data-open="${idOf(s)}">${s.photo ? "See photos and details" : "See details"}</button>
       <div class="meta">${esc(s.size)} · ${esc(s.scent)}</div>
       <div class="buy"><span class="price">$${s.price}</span>${button}</div>
     </div>
@@ -463,6 +492,48 @@ function render() {
 
 function openJar() { panel.hidden = scrim.hidden = false; document.body.classList.add("jar-open"); $("jar-close").focus(); }
 function closeJar() { panel.hidden = scrim.hidden = true; document.body.classList.remove("jar-open"); jarBtn.focus(); }
+
+// Slime details: tap a slime to see its photos and description.
+const detail = $("detail");
+function openDetail(id) {
+  const s = byId[id]; if (!s) return;
+  const pics = [s.photo, s.photo2, s.photo3].filter(Boolean);
+  const alts = [`${s.name} slime, one jar closed with the Slime Magic logo and one open`, `The open ${s.name} jar showing what is inside`, `A closed ${s.name} jar with the Slime Magic logo`];
+  detail.style.setProperty("--c1", s.colors[0]); detail.style.setProperty("--c2", s.colors[1]);
+  const button = s.soldOut
+    ? `<span class="btn" aria-disabled="true">Sold out</span>`
+    : `<button class="btn" type="button" data-add="${id}">Add to cart</button>`;
+  detail.innerHTML = `<div class="detail-in">
+    <div class="detail-pics">
+      ${pics.length ? `<img class="detail-main" id="detail-main" src="${esc(pics[0])}" alt="${esc(alts[0])}">` : `<div class="detail-main blob-wrap"><div class="blob" role="img" aria-label="${esc(s.name)} slime"></div></div>`}
+      ${pics.length > 1 ? `<div class="detail-thumbs">${pics.map((p, i) => `<button type="button" data-pic="${i}" aria-label="Show photo ${i + 1}" aria-current="${i === 0}"><img src="${esc(p)}" alt=""></button>`).join("")}</div>` : ""}
+    </div>
+    <div class="detail-text">
+      <button class="jar-close" type="button" data-close aria-label="Close">×</button>
+      <div class="chips"><span class="chip texture">${esc(s.texture)}</span><span class="chip">13+</span></div>
+      <h2 id="detail-title">${esc(s.name)}</h2>
+      <p>${esc(s.about)}</p>
+      <ul class="detail-facts">
+        <li><span>Texture</span><span>${esc(s.texture)}</span></li>
+        <li><span>Scent</span><span>${esc(s.scent)}</span></li>
+        <li><span>Size</span><span>${esc(s.size)} sealed tub</span></li>
+        <li><span>Ages</span><span>13+</span></li>
+      </ul>
+      <p class="detail-safety">Made by hand and built to last for at least 8 weeks. Please read <a href="#safety" data-close>Safety &amp; care</a> before playing.</p>
+      <div class="buy"><span class="price">$${s.price}</span>${button}</div>
+    </div>
+  </div>`;
+  detail.querySelectorAll("[data-pic]").forEach(b => b.addEventListener("click", () => {
+    const i = +b.dataset.pic; const m = $("detail-main"); m.src = pics[i]; m.alt = alts[i];
+    detail.querySelectorAll("[data-pic]").forEach(x => x.setAttribute("aria-current", x === b));
+  }));
+  detail.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", () => detail.close()));
+  if (typeof detail.showModal === "function") detail.showModal(); else detail.setAttribute("open", "");
+  document.body.classList.add("jar-open");
+}
+detail.addEventListener("close", () => document.body.classList.remove("jar-open"));
+detail.addEventListener("click", e => { if (e.target === detail) detail.close(); });
+grid.addEventListener("click", e => { const t = e.target.closest("[data-open]"); if (t) openDetail(t.dataset.open); });
 
 document.addEventListener("click", e => {
   const t = e.target.closest("[data-add],[data-more],[data-less]");
