@@ -406,7 +406,7 @@ footer a{color:#F4ECFB}
 // Edit this list to change the shop.
 // Set "soldOut: true" to show "Sold out".
 const SLIMES = [
-  { name: "Mermaid Lagoon", texture: "Clear", scent: "Unscented", price: 10, size: "4 oz",
+  { name: "Mermaid Lagoon", texture: "Clear", tag: "Medium", scent: "Unscented", price: 10, size: "4 oz",
     about: "Teal and violet swirled together like the ocean, with little whale charms on top.",
     colors: ["#5FF0D2", "#7B3FE0"], photo: "photos/mermaid-lagoon-1.jpg", photo2: "photos/mermaid-lagoon-2.jpg", photo3: "photos/mermaid-lagoon-3.jpg" },
   { name: "Fourth of July Fireworks", texture: "Glossy", scent: "Unscented", price: 10, size: "4 oz",
@@ -454,7 +454,7 @@ grid.innerHTML = SLIMES.map(s => {
   return `<article class="slime" style="--c1:${s.colors[0]};--c2:${s.colors[1]}">
     <button class="open pic" type="button" data-open="${idOf(s)}" aria-label="See ${esc(s.name)} up close">${pic}</button>
     <div class="body">
-      <div class="chips"><span class="chip texture">${esc(s.texture)}</span><span class="chip">13+</span></div>
+      <div class="chips"><span class="chip texture">${esc(s.texture)}</span><span class="chip">13+</span>${s.tag ? `<span class="chip">${esc(s.tag)}</span>` : ""}</div>
       <h3><button class="open" type="button" data-open="${idOf(s)}">${esc(s.name)}</button></h3>
       <p>${esc(s.about)}</p>
       <button class="more" type="button" data-open="${idOf(s)}">${s.photo ? "See photos and details" : "See details"}</button>
@@ -522,7 +522,7 @@ function openDetail(id) {
     </div>
     <div class="detail-text">
       <button class="jar-close" type="button" data-close aria-label="Close">×</button>
-      <div class="chips"><span class="chip texture">${esc(s.texture)}</span><span class="chip">13+</span></div>
+      <div class="chips"><span class="chip texture">${esc(s.texture)}</span><span class="chip">13+</span>${s.tag ? `<span class="chip">${esc(s.tag)}</span>` : ""}</div>
       <h2 id="detail-title">${esc(s.name)}</h2>
       <p>${esc(s.about)}</p>
       <ul class="detail-facts">
