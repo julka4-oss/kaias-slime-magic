@@ -420,6 +420,12 @@ const SLIMES = [
     about: "Sky blue slime with a burst of shimmering, color-changing sprinkles on top.",
     colors: ["#8FD3FF", "#B58CFF"], photo: "photos/liquid-fireworks-1.jpg", photo2: "photos/liquid-fireworks-2.jpg",
     photo3: "photos/liquid-fireworks-3.jpg", alt3: "Looking down into the open Liquid Fireworks jar at the shimmering sprinkles" },
+  { name: "Sunset Swirl", texture: "Glossy", scent: "Unscented", price: 10, size: "4 oz",
+    about: "A pink, orange and gold swirl like the sky at sunset, with sparkly gold glitter.",
+    colors: ["#FF8FB1", "#FFB347"], photo: "photos/sunset-swirl-1.jpg", photo2: "photos/sunset-swirl-2.jpg",
+    photo3: "photos/sunset-swirl-3.jpg", alt1: "Looking down into an open jar of pink, orange and gold Sunset Swirl slime",
+    alt2: "Sunset Swirl slime, one jar closed with the Slime Magic logo and one open",
+    alt3: "An open jar of Sunset Swirl slime showing the gold glitter" },
   { name: "Blue Raspberry Ice", texture: "Clear", scent: "Unscented", price: 10, size: "4 oz",
     about: "Crystal clear and glassy, with loud little bubbles when you poke it.",
     colors: ["#7FE3F2", "#1597C9"], photo: "", link: "" },
@@ -440,8 +446,8 @@ const byId = Object.fromEntries(SLIMES.map(s => [idOf(s), s]));
 
 grid.innerHTML = SLIMES.map(s => {
   const pic = s.photo
-    ? `<img src="${esc(s.photo)}" alt="${esc(s.name)} slime, one jar closed with the Slime Magic logo and one open" loading="lazy">` +
-      (s.photo2 ? `<img class="alt" src="${esc(s.photo2)}" alt="The open ${esc(s.name)} jar showing what is inside" loading="lazy">` : "")
+    ? `<img src="${esc(s.photo)}" alt="${esc(s.alt1 || `${s.name} slime, one jar closed with the Slime Magic logo and one open`)}" loading="lazy">` +
+      (s.photo2 ? `<img class="alt" src="${esc(s.photo2)}" alt="${esc(s.alt2 || `The open ${s.name} jar showing what is inside`)}" loading="lazy">` : "")
     : `<div class="blob" role="img" aria-label="${esc(s.name)} slime"></div>`;
   const button = s.soldOut
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
@@ -505,7 +511,7 @@ const detail = $("detail");
 function openDetail(id) {
   const s = byId[id]; if (!s) return;
   const pics = [s.photo, s.photo2, s.photo3].filter(Boolean);
-  const alts = [`${s.name} slime, one jar closed with the Slime Magic logo and one open`, `The open ${s.name} jar showing what is inside`, s.alt3 || `A closed ${s.name} jar with the Slime Magic logo`];
+  const alts = [s.alt1 || `${s.name} slime, one jar closed with the Slime Magic logo and one open`, s.alt2 || `The open ${s.name} jar showing what is inside`, s.alt3 || `A closed ${s.name} jar with the Slime Magic logo`];
   detail.style.setProperty("--c1", s.colors[0]); detail.style.setProperty("--c2", s.colors[1]);
   const button = s.soldOut
     ? `<span class="btn" aria-disabled="true">Sold out</span>`
